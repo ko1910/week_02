@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+char getHostAnswer(int X)
+{
+    char answer;
+    cout << "Is " << X << " your number? ";
+    cin >> answer;
+    return answer;
+}
+int selectNumber(int low, int high)
+{
+    return (low + high)/2;
+}
+int main()
+{
+    int result;
+    cin >> result;
+    int low = 1, high = 100;
+    int X;
+    char answer;
+    do {    X = selectNumber(low, high);
+            answer = getHostAnswer(X);
+            if (X > result)  {
+                high = X;
+                answer = '>';
+            }
+            if (X < result)  {
+                low = X;
+                answer = '<';
+            }
+            if (X == result)  {
+                cout << " Máy đoán đúng rồi!";
+            }
+       } while (answer != '=');
+       return 0;
+}
