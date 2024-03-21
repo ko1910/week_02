@@ -1,0 +1,38 @@
+/* de bai: cho mot mang co n phan tu duoc sap xep khong giam. Viet chuong trinh kiem tra xem co so x thuoc mang khong?
+neu co in ra chi so cua phan tu do.
+neu khong in ra no khong. */
+#include <iostream>
+using namespace std;
+int binarySearch(int n, int a[], int x)
+{
+    int low = 0;
+    int high = n-1;
+    int mid;
+    while ((low + high)/2 > 0) {
+        mid = (low + high)/2;
+        if (a[mid] > x) {
+            high = (low + high)/2;
+        } 
+        if (x < a[mid]) {
+            low = (low + high)/2;
+        }
+        if (x == a[mid]) {
+            break;
+        }
+    }
+    return mid;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i=0; i<n; i++)
+    {
+        cin >> a[i];
+    }
+    int x;
+    cin >> x;
+    cout << binarySearch(n, a, x);
+    return 0;
+}
