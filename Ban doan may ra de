@@ -3,39 +3,44 @@
 #include <ctime>
 using namespace std;
 
-int generateRandomNumber()
-{
-    return rand()%100+1;
-}
 int getPlayerGuess()
 {   int guess;
-    cout << "Nhập số bạn đoán: ";
+    cout << "Enter guess: ";
     cin >> guess;
     return guess;
 }
-void printAnswer (int guess, int secretNumber)
-{
+void playGuessIt(int guess, int secretNumber)
+{   int count = 0;
+    do {
+        guess = getPlayerGuess();
+        count ++;
         if (guess > secretNumber)
         {
-            cout << "Số bạn đoán lớn hơn!" << endl;
+            cout << "Guess higher!" << endl;
         }
         if (guess < secretNumber)
         {
-            cout << "Số bạn đoán nhỏ hơn!" << endl;
+            cout << "Guess  lower!" << endl;
         }
         if (guess == secretNumber)
         {
-            cout << "Bạn đoán đúng rồi!" << endl;
+            cout << "Bingo!" << endl;
+            cout << "Number of guesses: " << count << endl;
+            cout << "Your score: " << 100 - count << endl;
         }
+    } while (guess != secretNumber);
 }
 int main()
-{   srand(time(0));
-    int secretNumber = generateRandomNumber();
-    int guess;
-
+{   string answer;
     do {
-        guess = getPlayerGuess();
-        printAnswer(guess, secretNumber);
-    } while (guess != secretNumber);
+            srand(time(NULL));
+            int guess;
+            int secretNumber = rand()%100+1;
+            playGuessIt(guess, secretNumber);
+            cout << "Do you wanna continue play? ";
+            cin >> answer;
+            for (char &c : answer) {
+            c = tolower(c); }      // Convert answer to lowercase
+       } while (answer != "no");
     return 0;
 }
