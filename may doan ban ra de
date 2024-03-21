@@ -12,26 +12,36 @@ int selectNumber(int low, int high)
 {
     return (low + high)/2;
 }
-int main()
+void computerGuess(int result)
 {
-    int result;
-    cin >> result;
     int low = 1, high = 100;
     int X;
     char answer;
     do {    X = selectNumber(low, high);
-            answer = getHostAnswer(X);
             if (X > result)  {
                 high = X;
-                answer = '>';
+                answer = getHostAnswer(X);
             }
             if (X < result)  {
                 low = X;
-                answer = '<';
+                answer = getHostAnswer(X);
             }
             if (X == result)  {
-                cout << " Máy đoán đúng rồi!";
+                answer = getHostAnswer(X);
+                cout << "Bingo! " << endl;;
             }
        } while (answer != '=');
-       return 0;
+}
+int main()
+{   string answer;
+    do {
+        int result;
+        cin >> result;
+        computerGuess(result);
+        cout << "Do you wanna continue play?" << endl;
+        cin >> answer;
+        for (char &c : answer) {
+        c = tolower(c); }      // Convert answer to lowercase
+    } while (answer != "no") ;
+    return 0;
 }
